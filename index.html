@@ -788,10 +788,11 @@
 
             <div class="tab-bar-container">
                 <div class="tab-bar">
-                    <div class="tab-item active" data-tab="plugins">Recommended Addons (13)</div>
-                    <div class="tab-item" data-tab="mobile">Mobile Apps (6)</div>
-                    <div class="tab-item" data-tab="themes">Compatible Themes (17)</div>
-                    <div class="tab-item" data-tab="integrations">Third-Party Integrations (30+)</div>
+                    <div class="tab-item active" data-tab="plugins">Recommended Addons</div>
+                    <div class="tab-item" data-tab="mobile">Mobile Apps</div>
+                    <div class="tab-item" data-tab="themes">Compatible Themes</div>
+                    <div class="tab-item" data-tab="integrations">Third-Party Integrations</div>
+                    <div class="tab-item" data-tab="services">Services</div>
                 </div>
             </div>
         </div>
@@ -835,6 +836,13 @@
                 <div class="pill" data-filter="misc">Miscellaneous</div>
             </div>
             <div class="cards-grid" id="grid-integrations">
+                <!-- JS will populate -->
+            </div>
+        </div>
+
+        <!-- Tab 5: Services -->
+        <div class="tab-panel" id="panel-services">
+            <div class="cards-grid two-cols" id="grid-services">
                 <!-- JS will populate -->
             </div>
         </div>
@@ -885,14 +893,7 @@
                     features: ["Live Route Navigation", "Delivery Status Updates", "Proof of Delivery", "Earnings Tracker"],
                     bestFor: "Delivery agents, Logistics teams"
                 },
-                {
-                    name: "ShopGram",
-                    target: "Social Commerce App",
-                    tagline: "Turn your Instagram feed into a fully functional eCommerce store.",
-                    desc: "ShopGram lets entrepreneurs build a shoppable storefront directly from their social media presence. Create product listings, accept orders, and manage your shop all from a mobile-first experience.",
-                    features: ["Social Storefront", "Product Tagging", "Order Management", "Mobile Checkout"],
-                    bestFor: "Social sellers, Influencer brands"
-                },
+
                 {
                     name: "PocketStore",
                     target: "For Store Owners",
@@ -963,6 +964,15 @@
                 { name: "WEGLOT", desc: "Automatic website translation into 100+ languages for global reach.", cat: "misc", catTitle: "Miscellaneous" },
                 { name: "YayMail", desc: "Drag-and-drop WooCommerce email template customizer.", cat: "misc", catTitle: "Miscellaneous" },
                 { name: "WebToffee", desc: "Suite of WooCommerce tools for shipping, coupons, and store management.", cat: "misc", catTitle: "Miscellaneous" }
+            ],
+            services: [
+                {
+                    name: "weLabs",
+                    tagline: "Custom Development Specialists",
+                    desc: "weLabs is a sister concern of weDevs, specializing in customizing Dokan-related integrations and development. From bespoke feature development to complex integration work, weLabs helps you extend Dokan exactly the way your business needs.",
+                    tags: ["Custom Development", "Dokan Integrations", "Enterprise Support"],
+                    link: "https://welabs.dev"
+                }
             ]
         };
 
@@ -987,7 +997,7 @@
                 <div class="card-title">${item.name}</div>
                 <div class="card-desc">${item.desc}</div>
                 <div class="card-meta">
-                    <button class="btn btn-primary">Install Now</button>
+                    <button class="btn btn-primary">Install</button>
                 </div>
             </div>
         `).join('');
@@ -1003,7 +1013,7 @@
                 <div class="card-title">${item.name}</div>
                 <div class="card-desc">${item.desc}</div>
                 <div class="card-meta">
-                    <button class="btn btn-primary">Install Now</button>
+                    <button class="btn btn-primary">Install</button>
                 </div>
             </div>
         `).join('');
@@ -1083,7 +1093,7 @@
                 <div class="card-title">${item.name}</div>
                 <div class="card-desc">${item.desc}</div>
                 <div class="card-meta">
-                    <button class="btn btn-primary">Setup Integration</button>
+                    <button class="btn btn-outline">View Integration</button>
                 </div>
             </div>
         `).join('');
@@ -1134,11 +1144,35 @@
             filterCards(e.target.value);
         });
 
+        function renderServices() {
+            const grid = document.getElementById('grid-services');
+            grid.innerHTML = data.services.map(item => `
+            <div class="card" data-name="${item.name}">
+                <div class="card-header">
+                    <div class="card-icon-area" style="background: linear-gradient(135deg, #F0EBFF, #DDD5F9);">
+                        <svg class="icon" width="24" height="24" stroke="#7047EB"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <span class="badge badge-premium">Customization</span>
+                </div>
+                <div class="card-title">${item.name}</div>
+                <div style="font-size:12px;color:#7047EB;font-weight:600;margin-bottom:6px;">${item.tagline}</div>
+                <div class="card-desc">${item.desc}</div>
+                <div class="tag-row" style="margin-top:12px;">
+                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                <div class="card-meta">
+                    <a href="${item.link}" target="_blank" class="btn btn-primary btn-full" style="text-align:center;">Visit weLabs</a>
+                </div>
+            </div>
+        `).join('');
+        }
+
         // Initial Render
         renderPlugins();
         renderMobile();
         renderThemes();
         renderIntegrations();
+        renderServices();
 
     </script>
 
