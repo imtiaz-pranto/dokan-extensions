@@ -498,6 +498,45 @@
             color: white;
         }
 
+        .btn-installed {
+            background: transparent;
+            color: #9ea3a8;
+            border: 1.5px solid #d0d3d6;
+            cursor: default;
+            pointer-events: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-loading {
+            background: linear-gradient(135deg, #7047EB, #9B72F5);
+            color: white;
+            border: 1px solid var(--primary-purple);
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.85;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            flex-shrink: 0;
+        }
+
         .btn-group {
             display: flex;
             gap: 10px;
@@ -506,6 +545,85 @@
 
         .btn-full {
             width: 100%;
+        }
+
+        /* Integrations Hero Panel */
+        .integrations-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+            padding: 40px 20px;
+        }
+
+        .integrations-hero-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 64px 80px;
+            text-align: center;
+            max-width: 640px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 32px rgba(112, 71, 235, 0.08);
+        }
+
+        .integrations-hero-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(112,71,235,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .integrations-dot-grid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(112,71,235,0.12) 1px, transparent 1px);
+            background-size: 28px 28px;
+            opacity: 0.6;
+            pointer-events: none;
+            border-radius: 24px;
+        }
+
+        .integrations-count {
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--primary-purple);
+            line-height: 1;
+            margin-bottom: 12px;
+            position: relative;
+            letter-spacing: -2px;
+        }
+
+        .integrations-heading {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .integrations-subtext {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 440px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .integrations-cta-row {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            position: relative;
+            flex-wrap: wrap;
         }
 
         /* Content Panels */
@@ -777,35 +895,21 @@
                     <h1>Extensions</h1>
                     <p>Enhance your marketplace with Dokan plugins, apps, themes, and integrations.</p>
                 </div>
-                <div class="search-wrapper">
-                    <svg class="search-icon" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" class="search-input" id="extensionSearch" placeholder="Search extensions...">
-                </div>
             </div>
 
             <div class="tab-bar-container">
                 <div class="tab-bar">
                     <div class="tab-item active" data-tab="plugins">Recommended Addons</div>
                     <div class="tab-item" data-tab="mobile">Mobile Apps</div>
-                    <div class="tab-item" data-tab="themes">Compatible Themes</div>
-                    <div class="tab-item" data-tab="integrations">Third-Party Integrations</div>
+                    <div class="tab-item" data-tab="integrations">Compatibility</div>
                     <div class="tab-item" data-tab="services">Services</div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 1: Dokan Plugins -->
+        <!-- Tab 1: Recommended Addons -->
         <div class="tab-panel active" id="panel-plugins">
-            <div class="section-label">Dokan Addons</div>
-            <div class="cards-grid" id="grid-addons">
-                <!-- JS will populate -->
-            </div>
-
-            <div class="section-label">STOREPULSE ADDONS</div>
-            <div class="cards-grid" id="grid-wedevs">
+            <div class="cards-grid" id="grid-plugins">
                 <!-- JS will populate -->
             </div>
         </div>
@@ -817,30 +921,23 @@
             </div>
         </div>
 
-        <!-- Tab 3: Themes -->
-        <div class="tab-panel" id="panel-themes">
-            <div class="cards-grid" id="grid-themes">
-                <!-- JS will populate -->
-            </div>
-        </div>
-
-        <!-- Tab 4: Integrations -->
+        <!-- Tab 3: Integrations -->
         <div class="tab-panel" id="panel-integrations">
-            <div class="filter-pills">
-                <div class="pill active" data-filter="all">All</div>
-                <div class="pill" data-filter="shipping">Shipping</div>
-                <div class="pill" data-filter="payment">Payment Gateway</div>
-                <div class="pill" data-filter="service">Service</div>
-                <div class="pill" data-filter="wallet">Wallet & Cashback</div>
-                <div class="pill" data-filter="yith">YITH Plugins</div>
-                <div class="pill" data-filter="misc">Miscellaneous</div>
-            </div>
-            <div class="cards-grid" id="grid-integrations">
-                <!-- JS will populate -->
+            <div class="integrations-hero">
+                <div class="integrations-hero-card">
+                    <div class="integrations-dot-grid"></div>
+                    <div class="integrations-count">100+</div>
+                    <div class="integrations-heading">Compatible Themes &amp; Plugins</div>
+                    <p class="integrations-subtext">Dokan works seamlessly with a wide range of WordPress themes and plugins to extend your marketplace.</p>
+                    <div class="integrations-cta-row">
+                        <a href="https://dokan.co/wordpress/themes/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Browse Themes</a>
+                        <a href="https://dokan.co/wordpress/compatible-plugins/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Browse Plugins</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Tab 5: Services -->
+        <!-- Tab 4: Services -->
         <div class="tab-panel" id="panel-services">
             <div class="cards-grid two-cols" id="grid-services">
                 <!-- JS will populate -->
@@ -850,23 +947,20 @@
 
     <script>
         const data = {
-            addons: [
-                { name: "Dokan WPML", desc: "Add multilingual support to your Dokan-powered marketplace.", badge: "Premium" },
-                { name: "Dokan Migrator", desc: "Seamlessly migrate your marketplace from other platforms to Dokan.", badge: "Premium" },
-                { name: "Dokan Booking Addon", desc: "Let vendors offer bookable products and appointment scheduling.", badge: "Premium" },
-                { name: "Dokan Auction Addon", desc: "Enable auction-style product listings for vendors.", badge: "Premium" },
-                { name: "Dokan PDF Invoice", desc: "Automatically generate PDF invoices for orders across your marketplace.", badge: "Premium" }
-            ],
-            wedevs: [
-                { name: "wePos", desc: "A point-of-sale solution for managing in-store sales from WooCommerce.", badge: "Free" },
-                { name: "StoreGrowth", desc: "Boost vendor store performance with smart upsell and engagement tools.", badge: "Free + Premium" },
-                { name: "CartPulse", desc: "Recover abandoned carts with automated follow-up campaigns.", badge: "Premium" },
-                { name: "Texty", desc: "SMS notification plugin for WooCommerce and Dokan workflows.", badge: "Free + Premium" },
-                { name: "Conversion Tracking for WooCommerce", desc: "Track and optimize conversions across your marketplace with pixel integrations.", badge: "Free + Premium" },
-                { name: "TryAura", desc: "AI-powered virtual try-on experience for fashion and lifestyle stores.", badge: "Premium" },
-                { name: "CartPilot", desc: "Intelligent cart optimization and checkout enhancement for WooCommerce.", badge: "Premium" },
-                { name: "WPUF", desc: "Powerful user registration and frontend post submission forms.", badge: "Free + Premium" },
-                { name: "WeMail", desc: "Email marketing and newsletter automation built for WordPress.", badge: "Free + Premium" }
+            plugins: [
+                { name: "Dokan WPML", desc: "Add multilingual support to your Dokan-powered marketplace.", type: "install", installed: false },
+                { name: "Dokan Booking Addon", desc: "Let vendors offer bookable products and appointment scheduling.", type: "getplugin", link: "https://dokan.co/wordpress/dokan-booking-addon" },
+                { name: "Dokan Auction Addon", desc: "Enable auction-style product listings for vendors.", type: "getplugin", link: "https://dokan.co/wordpress/dokan-auction-addon" },
+                { name: "Dokan PDF Invoice", desc: "Automatically generate PDF invoices for orders across your marketplace.", type: "install", installed: false },
+                { name: "wePos", desc: "A point-of-sale solution for managing in-store sales from WooCommerce.", type: "getplugin", link: "https://dokan.co/wordpress/wepos" },
+                { name: "Texty", desc: "SMS notification plugin for WooCommerce and Dokan workflows.", type: "install", installed: false },
+                { name: "StoreGrowth", desc: "Boost vendor store performance with smart upsell and engagement tools.", type: "install", installed: false },
+                { name: "TryAura", desc: "AI-powered virtual try-on experience for fashion and lifestyle stores.", type: "install", installed: false },
+                { name: "WPUF", desc: "Powerful user registration and frontend post submission forms.", type: "install", installed: false },
+                { name: "weMail", desc: "Email marketing and newsletter automation built for WordPress.", type: "install", installed: false },
+                { name: "CartPulse", desc: "Recover abandoned carts with automated follow-up campaigns.", type: "getplugin", link: "https://dokan.co/wordpress/cartpulse" },
+                { name: "Conversion Tracking for WooCommerce", desc: "Track and optimize conversions across your marketplace with pixel integrations.", type: "install", installed: false },
+                { name: "Dokan Migrator", desc: "Seamlessly migrate your marketplace from other platforms to Dokan.", type: "install", installed: false }
             ],
             mobile: [
                 {
@@ -874,41 +968,21 @@
                     target: "For Customers",
                     tagline: "Shop from any vendor, anywhere, on any device.",
                     desc: "A fully-featured shopping app for your Dokan marketplace customers. Browse vendor stores, discover products, place orders, and track deliveries all from one place.",
-                    features: ["Multi-vendor Browsing", "Order Tracking", "Wishlist", "Push Notifications"],
-                    bestFor: "Marketplace customers, Guest shoppers"
+                    link: "https://dokan.co/apps/dokan-customer-app"
                 },
                 {
                     name: "Dokan Vendor App",
                     target: "For Vendors",
                     tagline: "Run your store from the palm of your hand.",
                     desc: "Gives vendors complete control over their store on the go. Manage products, process orders, view earnings, and respond to customer queries without needing a desktop.",
-                    features: ["Order Management", "Earnings Dashboard", "Product Editor", "Chat Support"],
-                    bestFor: "Active vendors, Solo sellers"
+                    link: "https://dokan.co/apps/dokan-vendor-app"
                 },
                 {
                     name: "Delivery Driver App",
                     target: "For Delivery Staff",
                     tagline: "Smart delivery management for your last-mile team.",
                     desc: "Built for delivery agents to accept tasks, navigate routes, update delivery status in real time, and communicate with customers and vendors seamlessly.",
-                    features: ["Live Route Navigation", "Delivery Status Updates", "Proof of Delivery", "Earnings Tracker"],
-                    bestFor: "Delivery agents, Logistics teams"
-                },
-
-                {
-                    name: "PocketStore",
-                    target: "For Store Owners",
-                    tagline: "Your fully customizable WooCommerce store in your pocket.",
-                    desc: "PocketStore is a white-label customer app for WooCommerce shop owners. Customize the branding, colors, and layout to match your store and give your customers a native mobile experience.",
-                    features: ["White Label Branding", "WooCommerce Sync", "Push Notifications", "Custom Layout"],
-                    bestFor: "WooCommerce store owners, D2C brands"
-                },
-                {
-                    name: "Vendor App (Generic)",
-                    target: "For Marketplace Vendors",
-                    tagline: "A dedicated vendor management app for marketplace sellers.",
-                    desc: "Designed exclusively for marketplace vendors, this app provides a streamlined experience for managing your Dokan storefront, tracking performance, and handling daily operations without logging into a browser.",
-                    features: ["Store Analytics", "Inventory Control", "Withdrawal Requests", "Notification Center"],
-                    bestFor: "Marketplace vendors, Multi-store sellers"
+                    link: "https://dokan.co/apps/delivery-driver-app"
                 }
             ],
             themes: [
@@ -976,47 +1050,45 @@
             ]
         };
 
-        function createBadge(type) {
-            if (!type) return '';
-            const className = type.toLowerCase().includes('+') ? 'badge-free-premium' : (type.toLowerCase() === 'free' ? 'badge-free' : 'badge-premium');
-            return `<span class="badge ${className}">${type}</span>`;
-        }
-
         function renderPlugins() {
-            const addonsGrid = document.getElementById('grid-addons');
-            const wedevsGrid = document.getElementById('grid-wedevs');
-
-            addonsGrid.innerHTML = data.addons.map(item => `
-            <div class="card" data-name="${item.name}">
-                <div class="card-header">
+            const grid = document.getElementById('grid-plugins');
+            grid.innerHTML = data.plugins.map(item => {
+                let btnHtml;
+                if (item.type === 'install') {
+                    if (item.installed) {
+                        btnHtml = `<button class="btn btn-installed btn-full" disabled><span class="btn-spinner" style="border:2px solid rgba(0,163,42,0.3);border-top-color:#00A32A;"></span> Installed</button>`;
+                    } else {
+                        btnHtml = `<button class="btn btn-primary btn-full" onclick="installPlugin(this)">Install</button>`;
+                    }
+                } else {
+                    btnHtml = `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">Get Plugin</a>`;
+                }
+                return `
+                <div class="card" data-name="${item.name}">
                     <div class="card-icon-area">
                         <svg class="icon" width="24" height="24" stroke="#7047EB"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                     </div>
-                    ${createBadge(item.badge)}
-                </div>
-                <div class="card-title">${item.name}</div>
-                <div class="card-desc">${item.desc}</div>
-                <div class="card-meta">
-                    <button class="btn btn-primary">Install</button>
-                </div>
-            </div>
-        `).join('');
-
-            wedevsGrid.innerHTML = data.wedevs.map(item => `
-            <div class="card" data-name="${item.name}">
-                <div class="card-header">
-                    <div class="card-icon-area">
-                        <svg class="icon" width="24" height="24" stroke="#7047EB"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                    <div class="card-title">${item.name}</div>
+                    <div class="card-desc">${item.desc}</div>
+                    <div class="card-meta">
+                        ${btnHtml}
                     </div>
-                    ${createBadge(item.badge)}
-                </div>
-                <div class="card-title">${item.name}</div>
-                <div class="card-desc">${item.desc}</div>
-                <div class="card-meta">
-                    <button class="btn btn-primary">Install</button>
-                </div>
-            </div>
-        `).join('');
+                </div>`;
+            }).join('');
+        }
+
+        function installPlugin(btn) {
+            // Loading state
+            btn.disabled = true;
+            btn.className = 'btn btn-loading btn-full';
+            btn.innerHTML = '<span class="btn-spinner"></span> Installing...';
+
+            // Installed state after 1.5s
+            setTimeout(() => {
+                btn.className = 'btn btn-installed btn-full';
+                btn.disabled = true;
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00A32A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Installed';
+            }, 1500);
         }
 
         function renderMobile() {
@@ -1032,72 +1104,16 @@
                         <div class="app-card-badge">${item.target}</div>
                     </div>
                 </div>
-                <hr class="app-card-separator">
                 <div class="app-card-tagline">${item.tagline}</div>
                 <div class="app-card-desc">${item.desc}</div>
-                <div class="app-card-features">
-                    ${item.features.map(f => `<span class="feature-pill">${f}</span>`).join('')}
-                </div>
-                <div class="app-card-best-for"><b>Best For:</b> ${item.bestFor}</div>
                 <div class="app-card-footer">
-                    <a href="#" class="app-card-btn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.24-1.99 1.1-3.15-1 .04-2.21.67-2.91 1.49-.63.72-1.19 1.91-1.05 3.03 1.1.09 2.13-.54 2.86-1.37z"/></svg>
-                        App Store
-                    </a>
-                    <a href="#" class="app-card-btn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5,19.3L16.2,12L5,4.7V19.3z M18,12L6,19.8V4.2L18,12z"/></svg>
-                        Play Store
-                    </a>
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="app-card-btn" style="flex:unset;width:100%;">Get App</a>
                 </div>
             </div>
         `).join('');
         }
 
-        function renderThemes() {
-            const grid = document.getElementById('grid-themes');
-            grid.innerHTML = data.themes.map(item => `
-            <div class="card" data-name="${item.name}">
-                <div class="theme-thumbnail">
-                    <svg class="icon" width="48" height="48" stroke="#C4B5F4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                </div>
-                <div class="card-title">${item.name}</div>
-                <div class="card-target">${item.category}</div>
-                <div class="card-author">By ${item.author}</div>
-                <div class="card-desc-long">${item.authorDesc}</div>
-                <div class="tag-row">
-                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-                <div class="card-meta" style="margin-top: auto;">
-                    <div class="tested-with">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Tested with Dokan
-                    </div>
-                    <button class="btn btn-outline btn-full">View Theme</button>
-                </div>
-            </div>
-        `).join('');
-        }
 
-        function renderIntegrations(filter = 'all') {
-            const grid = document.getElementById('grid-integrations');
-            const filtered = filter === 'all' ? data.integrations : data.integrations.filter(i => i.cat === filter);
-
-            grid.innerHTML = filtered.map(item => `
-            <div class="card" data-name="${item.name}" data-category="${item.cat}">
-                <div class="card-header">
-                    <div class="card-icon-area">
-                        <svg class="icon" width="24" height="24" stroke="#7047EB"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                    </div>
-                    <span class="badge badge-category">${item.catTitle}</span>
-                </div>
-                <div class="card-title">${item.name}</div>
-                <div class="card-desc">${item.desc}</div>
-                <div class="card-meta">
-                    <button class="btn btn-outline">View Integration</button>
-                </div>
-            </div>
-        `).join('');
-        }
 
         // Tab Switching Logic
         document.querySelectorAll('.tab-item').forEach(tab => {
@@ -1108,19 +1124,6 @@
                 tab.classList.add('active');
                 const panelId = `panel-${tab.dataset.tab}`;
                 document.getElementById(panelId).classList.add('active');
-
-                // Clear search when switching tabs
-                document.getElementById('extensionSearch').value = '';
-                filterCards('');
-            });
-        });
-
-        // Pill Filtering Logic (Tab 4)
-        document.querySelectorAll('.pill').forEach(pill => {
-            pill.addEventListener('click', () => {
-                document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                renderIntegrations(pill.dataset.filter);
             });
         });
 
@@ -1140,9 +1143,6 @@
             });
         }
 
-        document.getElementById('extensionSearch').addEventListener('keyup', (e) => {
-            filterCards(e.target.value);
-        });
 
         function renderServices() {
             const grid = document.getElementById('grid-services');
@@ -1161,7 +1161,7 @@
                     ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
                 <div class="card-meta">
-                    <a href="${item.link}" target="_blank" class="btn btn-primary btn-full" style="text-align:center;">Visit weLabs</a>
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full" style="text-align:center;">Visit weLabs</a>
                 </div>
             </div>
         `).join('');
@@ -1170,8 +1170,6 @@
         // Initial Render
         renderPlugins();
         renderMobile();
-        renderThemes();
-        renderIntegrations();
         renderServices();
 
     </script>
